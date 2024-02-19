@@ -1,12 +1,11 @@
 import fastify, {FastifyInstance} from 'fastify'
-import {QuestionRoutes} from '../../presentation/routes/question.route'
+import {RouteConfig} from './route.config'
 
 export const start = async () => {
 	const app = await load()
 
 	try {
-		app
-			.register(QuestionRoutes, { prefix: '/v1' })
+		RouteConfig(app)
 
 		await listen(app)
 	} catch (err) {
