@@ -1,10 +1,8 @@
-import fastify, {FastifyInstance, FastifyReply, FastifyRequest} from "fastify";
+import 'reflect-metadata'
+import {start} from './main/config/app.config'
 
-const app: FastifyInstance = fastify()
+const main = (): void => {
+	start().then()
+}
 
-app.get(
-    '/',
-    {},
-    (request: FastifyRequest, reply: FastifyReply) => {
-        reply.status(200).send({ message: 'Hello, World' })
-    })
+main()
