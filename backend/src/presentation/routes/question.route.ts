@@ -4,6 +4,11 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 	app
 		.post(
 			'/question',
+			{
+				schema: {
+					tags: ['Question']
+				}
+			},
 			async (request: FastifyRequest, reply: FastifyReply) => {
 				reply
 					.status(200)
