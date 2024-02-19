@@ -7,12 +7,14 @@ import fastify, {
 import {RouteConfig} from './route.config'
 import {DefaultLogger} from './logger.config'
 import pino from 'pino'
+import {DocumentationConfig} from './documentation.config'
 
 export const start = async () => {
 	const app = await load()
 
 	try {
-		RouteConfig(app)
+		await DocumentationConfig(app)
+		await RouteConfig(app)
 
 		await listen(app)
 	} catch (err) {
