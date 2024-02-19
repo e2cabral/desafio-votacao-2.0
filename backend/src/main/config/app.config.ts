@@ -1,5 +1,12 @@
-import fastify, {FastifyInstance} from 'fastify'
+import fastify, {
+	FastifyInstance,
+	RawReplyDefaultExpression,
+	RawRequestDefaultExpression,
+	RawServerDefault
+} from 'fastify'
 import {RouteConfig} from './route.config'
+import {DefaultLogger} from './logger.config'
+import pino from 'pino'
 
 export const start = async () => {
 	const app = await load()
@@ -13,10 +20,22 @@ export const start = async () => {
 	}
 }
 
-const listen = async (app: FastifyInstance): Promise<string> => {
+const listen = async (app: FastifyInstance<
+	RawServerDefault,
+	RawRequestDefaultExpression,
+	RawReplyDefaultExpression,
+	pino.Logger<never>
+>): Promise<string> => {
 	return app.listen({ port: 3000 })
 }
 
-const load = async (): Promise<FastifyInstance> => {
-	return fastify()
+const load = async (): Promise<FastifyInstance<
+	RawServerDefault,
+	RawRequestDefaultExpression,
+	RawReplyDefaultExpression,
+	pino.Logger<never>
+>> => {
+	return fastify({
+		logger: DefaultLogger()
+	})
 }
