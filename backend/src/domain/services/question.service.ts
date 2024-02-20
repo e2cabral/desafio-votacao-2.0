@@ -14,6 +14,10 @@ export default class QuestionService {
 	async startSession(id: string) {
 		const question = await Question.findOne(id)
 
+		if (question!.sessionStartedDate) {
+			throw new Error('The session of this question has already started.')
+		}
+
 		const today = new Date()
 		const session: SessionTime = {
 			year: today.getFullYear(),
@@ -55,7 +59,7 @@ export default class QuestionService {
 
 		const { year, month, day, hour, minutes, seconds } = session
 
-		const dateFormated = new Date(
+		const dateFormatted = new Date(
 			year,
 			month,
 			day,
@@ -63,7 +67,7 @@ export default class QuestionService {
 			minutes,
 			seconds
 		).toLocaleDateString(
-			'pt-br',
+			'en-US',
 			{
 				year:'numeric',
 				month:'numeric',
@@ -71,11 +75,11 @@ export default class QuestionService {
 				hour: '2-digit',
 				minute: '2-digit',
 				second: '2-digit',
-				dayPeriod: 'narrow'
+				hour12: true
 			}
 		)
 
-		await Question.startSession(dateFormated, id)
+		await Question.startSession(dateFormatted, id)
 	}
 
 	async findStarted(page: number, itemsPerPage: number) {
