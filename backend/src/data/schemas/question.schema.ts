@@ -12,4 +12,4 @@ export const Question = new Schema<QuestionEntity>({
 	sessionStartedDate: { type: 'Date', required: false }
 })
 
-export const QuestionModel = new mongoose.Model('Question', Question)
+export const QuestionModel = mongoose.model('Question', Question)

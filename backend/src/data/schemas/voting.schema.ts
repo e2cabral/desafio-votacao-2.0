@@ -6,4 +6,4 @@ export const Voting = new Schema<VotingEntity>({
 	answer: { type: 'String', required: true }
 })
 
-export const VotingModel = new mongoose.Model('Voting', Voting)
+export const VotingModel = mongoose.model('Voting', Voting)

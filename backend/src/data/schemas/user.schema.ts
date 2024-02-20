@@ -8,4 +8,4 @@ export const User = new Schema<UserEntity>({
 	votes: [{ type: mongoose.SchemaTypes.ObjectId, required: true }]
 })
 
-export const UserModel = new mongoose.Model('User', User)
+export const UserModel = mongoose.model('User', User)
