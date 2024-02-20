@@ -5,7 +5,7 @@ import { logger } from '../../main/config/logger.config'
 export default class QuestionService {
 	async create(question: QuestionEntity) {
 		try {
-			await Question.create(question)
+			return Question.create(question)
 		} catch (err) {
 			logger.error((err as Error).message)
 		}
