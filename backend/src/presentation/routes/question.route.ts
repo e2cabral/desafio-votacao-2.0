@@ -1,4 +1,5 @@
-import {FastifyInstance, FastifyReply, FastifyRequest, RouteShorthandOptions} from 'fastify'
+import {FastifyInstance, RouteShorthandOptions} from 'fastify'
+import { create } from '../controllers/question/create'
 
 export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, done: () => void) => {
 	app
@@ -9,11 +10,7 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 					tags: ['Question']
 				}
 			},
-			async (request: FastifyRequest, reply: FastifyReply) => {
-				reply
-					.status(200)
-					.send({ message: 'question' })
-			}
+			create
 		)
 
 	done()
