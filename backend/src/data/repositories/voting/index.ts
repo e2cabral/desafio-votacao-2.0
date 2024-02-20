@@ -4,7 +4,7 @@ import {VotingModel} from '../../schemas/voting.schema'
 import {QuestionModel} from '../../schemas/question.schema'
 
 export namespace Voting {
-	export const create = async (questionId: string, voting: VotingEntity) => {
+	export const vote = async (questionId: string, voting: VotingEntity) => {
 		try {
 			const vote = await VotingModel.create(voting)
 			const question = await QuestionModel.findOne({ _id: questionId })
