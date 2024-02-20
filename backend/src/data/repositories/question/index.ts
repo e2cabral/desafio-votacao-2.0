@@ -43,6 +43,7 @@ export namespace Question {
 			return QuestionModel
 				.find({ sessionStartedDate: { $ne: null } })
 				.populate('createdBy')
+				.populate('votes')
 				.skip((page - 1) * validItemsPerPage)
 				.limit(validItemsPerPage)
 		} catch (err) {
