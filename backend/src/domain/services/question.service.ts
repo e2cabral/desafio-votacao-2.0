@@ -77,4 +77,12 @@ export default class QuestionService {
 
 		await Question.startSession(dateFormated, id)
 	}
+
+	async findStarted(page: number, itemsPerPage: number) {
+		try {
+			return Question.findStarted(page, itemsPerPage)
+		} catch (err) {
+			logger.error((err as Error).message)
+		}
+	}
 }
