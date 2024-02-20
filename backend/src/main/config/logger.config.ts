@@ -6,7 +6,7 @@ const prettier = pretty({
 	colorizeObjects: true
 })
 
-const logger = pino({ level: 'info' }, prettier)
+export const logger = pino({ level: 'info' }, prettier)
 
 export const DefaultLogger = () => {
 	return logger
