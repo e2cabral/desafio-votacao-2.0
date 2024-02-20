@@ -6,14 +6,29 @@ import {QuestionModel} from '../../schemas/question.schema'
 export namespace Voting {
 	export const vote = async (questionId: string, voting: VotingEntity) => {
 		try {
-			const vote = await VotingModel.create(voting)
+			const questionVoted = await QuestionModel
+				.findOne({ _id: questionId })
+				.populate('votes')
+				.exec()
+
+			const hasAlreadyVoted = questionVoted!
+				.votes
+				.some((vote: any) => vote.userId.toString() === voting.userId)
+
+			if (hasAlreadyVoted) {
+				throw new Error('User has already voted')
+			}
+
+			const voted = await VotingModel.create(voting)
 			const question = await QuestionModel.findOne({ _id: questionId })
 
-			await question?.updateOne({ $push: { votes: vote._id } })
+			await question?.updateOne({ $push: { votes: voted._id } })
 
-			return vote
+			return voted
 		} catch (err) {
-			logger.error((err as Error).message)
+			const message = (err as Error).message
+			logger.error(message)
+			throw err
 		}
 	}
 }
