@@ -9,7 +9,7 @@ export const Question = new Schema<QuestionEntity>({
 		required: true
 	},
 	votes: [mongoose.SchemaTypes.ObjectId],
-	sessionStartedDate: { type: 'Date', required: true }
+	sessionStartedDate: { type: 'Date', required: false }
 })
 
 export const QuestionModel = new mongoose.Model('Question', Question)
