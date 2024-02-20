@@ -11,7 +11,6 @@ export interface SessionTime {
 
 export interface VotingEntity {
     userId: mongoose.ObjectId
-    questionId: mongoose.ObjectId
     answer: string
 }
 
