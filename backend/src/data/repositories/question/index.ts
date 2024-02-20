@@ -30,4 +30,17 @@ export namespace Question {
 			logger.error((err as Error).message)
 		}
 	}
+
+	export const findStarted = (page: number, itemsPerPage: number) => {
+		try {
+			const validItemsPerPage = itemsPerPage ? itemsPerPage : 10
+			return QuestionModel
+				.find({ sessionStartedDate: { $ne: null } })
+				.populate('createdBy')
+				.skip((page - 1) * validItemsPerPage)
+				.limit(validItemsPerPage)
+		} catch (err) {
+			logger.error((err as Error).message)
+		}
+	}
 }
