@@ -9,6 +9,7 @@ import {Versioning} from './versioning.config'
 import pino from 'pino'
 import metrics from 'fastify-metrics'
 import {UserRoutes} from '../../presentation/routes/user.route'
+import {VotingRoutes} from '../../presentation/routes/voting.route'
 
 export const RouteConfig = async (app: FastifyInstance<
 	RawServerDefault,
@@ -20,4 +21,5 @@ export const RouteConfig = async (app: FastifyInstance<
 		.register(metrics, { endpoint: '/metrics' })
 		.register(QuestionRoutes, { prefix: Versioning.V1 })
 		.register(UserRoutes, { prefix: Versioning.V1 })
+		.register(VotingRoutes, { prefix: Versioning.V1 })
 }
