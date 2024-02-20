@@ -8,7 +8,7 @@ export const Question = new Schema<QuestionEntity>({
 		type: mongoose.SchemaTypes.Mixed,
 		required: true
 	},
-	votes: [mongoose.SchemaTypes.ObjectId],
+	votes: [{ type: mongoose.SchemaTypes.ObjectId, ref: 'Voting' }],
 	createdBy: { type: mongoose.SchemaTypes.ObjectId, ref: 'User' },
 	sessionStartedDate: { type: 'String', required: false }
 })
