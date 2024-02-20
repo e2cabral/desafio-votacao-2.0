@@ -5,4 +5,5 @@ export interface UserEntity {
     email: string
     phone: string
     votes: mongoose.ObjectId[]
+    questions: mongoose.ObjectId[]
 }

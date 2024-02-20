@@ -19,5 +19,6 @@ export default interface QuestionEntity {
     description: string,
     sessionTime: SessionTime,
     votes: mongoose.ObjectId[],
+    createdBy: mongoose.ObjectId
     sessionStartedDate: Date
 }
