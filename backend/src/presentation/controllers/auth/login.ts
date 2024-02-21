@@ -8,15 +8,15 @@ export const login = async (request: FastifyRequest, reply: FastifyReply) => {
 	try {
 		const user = ConvertTo<Omit<UserEntity, 'name | phone | votes | questions'>>(request.body)
 
-		const token = await AuthService.login(user.email, user.password, request)
+		const info = await AuthService.login(user.email, user.password, request)
 
-		reply.setCookie('access_token', token, {
+		reply.setCookie('access_token', info.token, {
 			path: '/',
 			httpOnly: true,
 			secure: true,
 		})
 
-		reply.status(200).send({ body: token })
+		reply.status(200).send({ body: info })
 	} catch (err) {
 		const message = (err as Error).message
 		logger.error(message)
