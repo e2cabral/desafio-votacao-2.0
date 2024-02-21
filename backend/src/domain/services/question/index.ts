@@ -1,5 +1,5 @@
 import QuestionEntity, {SessionTime} from '../../entities/question.entity'
-import {Question} from '../../../data/repositories/question'
+import {findByCreator, Question} from '../../../data/repositories/question'
 import { logger } from '../../../main/config/logger.config'
 
 export namespace QuestionService {
@@ -85,6 +85,14 @@ export namespace QuestionService {
 	export const findStarted = async (page: number, itemsPerPage: number)=> {
 		try {
 			return Question.findStarted(page, itemsPerPage)
+		} catch (err) {
+			logger.error((err as Error).message)
+		}
+	}
+
+	export const findByCreator = async (userId: string, page: number, itemsPerPage: number)=> {
+		try {
+			return Question.findByCreator(userId, page, itemsPerPage)
 		} catch (err) {
 			logger.error((err as Error).message)
 		}
