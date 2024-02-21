@@ -3,6 +3,7 @@
     "start:dev": "ts-node-dev --respawn --transpile-only src/app.ts"
   },
   "dependencies": {
+    "@fastify/jwt": "^8.0.0",
     "@fastify/swagger": "^8.14.0",
     "@fastify/swagger-ui": "^2.1.0",
     "bcrypt": "^5.1.1",
