@@ -37,15 +37,20 @@ export namespace Question {
 		}
 	}
 
-	export const findStarted = (page: number, itemsPerPage: number) => {
+	export const findStarted = async (page: number, itemsPerPage: number) => {
 		try {
 			const validItemsPerPage = itemsPerPage ? itemsPerPage : 10
-			return QuestionModel
+
+			const total = await QuestionModel.countDocuments({ sessionStartedDate: { $ne: null } })
+
+			const data = await QuestionModel
 				.find({ sessionStartedDate: { $ne: null } })
 				.populate('createdBy')
 				.populate('votes')
 				.skip((page - 1) * validItemsPerPage)
 				.limit(validItemsPerPage)
+
+			return { data, total }
 		} catch (err) {
 			logger.error((err as Error).message)
 		}
