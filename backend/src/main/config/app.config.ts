@@ -19,8 +19,8 @@ export const start = async () => {
 	try {
 		config()
 
-		await AuthConfig(app)
 		await CorsConfig(app)
+		await AuthConfig(app)
 		await DocumentationConfig(app)
 		await RouteConfig(app)
 

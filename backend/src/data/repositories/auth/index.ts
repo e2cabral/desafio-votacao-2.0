@@ -18,7 +18,21 @@ export const login = async (email: string, password: string, request: FastifyReq
 		throw new Error('Your email or password is invalid')
 	}
 
-	return request.jwt.sign({payload: { email: user.email, id: user._id }})
+	const token = request
+		.jwt
+		.sign({
+			payload: {
+				email: user.email,
+				id: user._id,
+				password: user.password
+			}
+		})
+
+	return {
+		id: user._id,
+		email: user.email,
+		token,
+	}
 }
 
 export const register = async (user: UserEntity) => {
