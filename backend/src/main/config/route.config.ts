@@ -8,7 +8,6 @@ import {QuestionRoutes} from '../../presentation/routes/question.route'
 import {Versioning} from './versioning.config'
 import pino from 'pino'
 import metrics from 'fastify-metrics'
-import {UserRoutes} from '../../presentation/routes/user.route'
 import {VotingRoutes} from '../../presentation/routes/voting.route'
 import {AuthRoutes} from '../../presentation/routes/auth.route'
 
