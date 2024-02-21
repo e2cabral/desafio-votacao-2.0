@@ -1,9 +1,9 @@
 import {UserModel} from '../../schemas/user.schema'
 import bcrypt from 'bcrypt'
-import {FastifyInstance} from 'fastify'
+import {FastifyRequest} from 'fastify'
 
 export namespace Auth {
-export const login = async (email: string, password: string, app: FastifyInstance) => {
+export const login = async (email: string, password: string, request: FastifyRequest) => {
 	const user = await UserModel.findOne({ email: email })
 
 	if (!user) {
@@ -16,6 +16,6 @@ export const login = async (email: string, password: string, app: FastifyInstanc
 		throw new Error('Your email or password is invalid')
 	}
 
-	return app.jwt.sign({payload: { email: user.email, id: user._id }})
+	return request.jwt.sign({payload: { email: user.email, id: user._id }})
 }
 }
