@@ -6,6 +6,7 @@ export const UserRoutes = (app: FastifyInstance, _: RouteShorthandOptions, done:
 		.post(
 			'/user',
 			{
+				onRequest: app.authenticate,
 				schema: {
 					tags: ['User']
 				}

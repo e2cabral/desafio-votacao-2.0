@@ -6,6 +6,7 @@ export const VotingRoutes = (app: FastifyInstance, _: RouteShorthandOptions, don
 		.post(
 			'/vote/:questionId',
 			{
+				onRequest: app.authenticate,
 				schema: {
 					tags: ['Vote']
 				}

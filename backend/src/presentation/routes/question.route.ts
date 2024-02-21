@@ -7,12 +7,13 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 	app
 		.post(
 			'/question',
-			{ schema: { tags: ['Question'] } },
+			{ onRequest: app.authenticate, schema: { tags: ['Question'] } },
 			create
 		)
 		.patch(
 			'/question/start/:id',
 			{
+				onRequest: app.authenticate,
 				schema: {
 					tags: ['Question']
 				}
@@ -22,6 +23,7 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 		.get(
 			'/question/started',
 			{
+				onRequest: app.authenticate,
 				schema: {
 					querystring: {
 						page: { type: 'number' },
