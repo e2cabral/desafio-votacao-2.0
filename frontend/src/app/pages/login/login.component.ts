@@ -4,6 +4,7 @@ import {SubmitButtonComponent} from '../../components/submit-button/submit-butto
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
 import {AuthService} from '../../services/auth.service'
 import {UserAuth} from '../../domain/models/user-auth.model'
+import {LocalStorageService} from '../../services/local-storage.service'
 
 @Component({
 	selector: 'app-login',
@@ -13,7 +14,7 @@ import {UserAuth} from '../../domain/models/user-auth.model'
 	styleUrl: './login.component.css'
 })
 export class LoginComponent {
-	constructor(private auth: AuthService, private router: Router) {
+	constructor(private auth: AuthService, private router: Router, private localStorage: LocalStorageService) {
 	}
 
 	public form = new FormGroup({
@@ -35,10 +36,9 @@ export class LoginComponent {
 			.auth
 			.login(user)
 			.subscribe(res => {
-
-				if ((res as { body: string }).body) {
-					this.router.navigate(['/home'])
-				}
+				const body = (res as { body: string }).body
+				this.localStorage.set('@auth', body)
+				this.router.navigate(['/home'])
 
 				return
 			})
