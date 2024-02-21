@@ -5,6 +5,7 @@ declare global {
             MONGO_DATABASE: string
             MONGO_USER: string
             MONGO_PASSWORD: string
+            JWT_SECRET: string
         }
     }
 }
