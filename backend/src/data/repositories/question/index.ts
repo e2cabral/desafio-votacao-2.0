@@ -50,4 +50,17 @@ export namespace Question {
 			logger.error((err as Error).message)
 		}
 	}
+
+	export const findByCreator = (userId: string, page: number, itemsPerPage: number) => {
+		try {
+			const validItemsPerPage = itemsPerPage ? itemsPerPage : 10
+			return QuestionModel
+				.find({ createdBy: userId })
+				.populate('votes')
+				.skip((page - 1) * validItemsPerPage)
+				.limit(validItemsPerPage)
+		} catch (err) {
+			logger.error((err as Error).message)
+		}
+	}
 }
