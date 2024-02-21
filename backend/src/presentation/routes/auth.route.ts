@@ -1,4 +1,4 @@
-import {FastifyInstance, FastifyReply, FastifyRequest, RouteShorthandOptions} from 'fastify'
+import {FastifyInstance, RouteShorthandOptions} from 'fastify'
 import {login} from '../controllers/auth/login'
 
 export const AuthRoutes = (app: FastifyInstance, _: RouteShorthandOptions, done: () => void) => {
@@ -10,7 +10,7 @@ export const AuthRoutes = (app: FastifyInstance, _: RouteShorthandOptions, done:
 					tags: ['Auth']
 				}
 			},
-			async (request: FastifyRequest, reply: FastifyReply) => await login(request, reply, app)
+			login
 		)
 
 	done()
