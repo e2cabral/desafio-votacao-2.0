@@ -2,6 +2,7 @@ import {FastifyInstance, RouteShorthandOptions} from 'fastify'
 import { create } from '../controllers/question/create'
 import {startSession} from '../controllers/question/start-session'
 import {findStarted} from '../controllers/question/find-started'
+import {findByCreator} from '../controllers/question/find-by-creator'
 
 export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, done: () => void) => {
 	app
@@ -33,6 +34,20 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 				}
 			},
 			findStarted
+		)
+		.get(
+			'/question/:userId/creator',
+			{
+				// onRequest: app.authenticate,
+				schema: {
+					querystring: {
+						page: { type: 'number' },
+						itemsPerPage: { type: 'number' },
+					},
+					tags: ['Question']
+				}
+			},
+			findByCreator
 		)
 
 	done()
