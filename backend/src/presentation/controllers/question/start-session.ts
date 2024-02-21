@@ -1,14 +1,12 @@
 import {FastifyReply, FastifyRequest} from 'fastify'
 import { logger } from '../../../main/config/logger.config'
-import {QuestionServiceFactory} from '../../../infra/patterns/factories/question-service.factory'
+import {QuestionService} from '../../../domain/services/question'
 
 export const startSession = async (request: FastifyRequest, reply: FastifyReply) => {
 	try {
-		const service = QuestionServiceFactory()
-
 		const id = request.params!.id
 
-		const result = await service.startSession(id)
+		const result = await QuestionService.startSession(id)
 
 		reply.status(200).send({ body: result })
 	} catch (err) {

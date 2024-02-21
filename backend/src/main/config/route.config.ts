@@ -21,7 +21,6 @@ export const RouteConfig = async (app: FastifyInstance<
 	await app
 		.register(metrics, { endpoint: '/metrics' })
 		.register(QuestionRoutes, { prefix: Versioning.V1 })
-		.register(UserRoutes, { prefix: Versioning.V1 })
 		.register(VotingRoutes, { prefix: Versioning.V1 })
 		.register(AuthRoutes, { prefix: Versioning.V1 })
 }

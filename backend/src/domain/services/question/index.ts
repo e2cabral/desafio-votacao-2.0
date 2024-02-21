@@ -1,9 +1,9 @@
-import QuestionEntity, {SessionTime} from '../entities/question.entity'
-import {Question} from '../../data/repositories/question'
-import { logger } from '../../main/config/logger.config'
+import QuestionEntity, {SessionTime} from '../../entities/question.entity'
+import {Question} from '../../../data/repositories/question'
+import { logger } from '../../../main/config/logger.config'
 
-export default class QuestionService {
-	async create(question: QuestionEntity) {
+export namespace QuestionService {
+	export const create = async (question: QuestionEntity)=> {
 		try {
 			return Question.create(question)
 		} catch (err) {
@@ -11,7 +11,7 @@ export default class QuestionService {
 		}
 	}
 
-	async startSession(id: string) {
+	export const startSession = async (id: string)=> {
 		const question = await Question.findOne(id)
 
 		if (question!.sessionStartedDate) {
@@ -82,7 +82,7 @@ export default class QuestionService {
 		await Question.startSession(dateFormatted, id)
 	}
 
-	async findStarted(page: number, itemsPerPage: number) {
+	export const findStarted = async (page: number, itemsPerPage: number)=> {
 		try {
 			return Question.findStarted(page, itemsPerPage)
 		} catch (err) {

@@ -4,7 +4,7 @@ import {FastifyRequest} from 'fastify'
 import {UserEntity} from '../../../domain/entities/user.entity'
 import {logger} from '../../../main/config/logger.config'
 
-export namespace Auth {
+export namespace AuthRepository {
 export const login = async (email: string, password: string, request: FastifyRequest) => {
 	const user = await UserModel.findOne({ email: email })
 
