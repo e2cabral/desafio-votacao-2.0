@@ -38,7 +38,7 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 		.get(
 			'/question/:userId/creator',
 			{
-				// onRequest: app.authenticate,
+				onRequest: app.authenticate,
 				schema: {
 					querystring: {
 						page: { type: 'number' },
