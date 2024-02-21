@@ -1,0 +1,32 @@
+<main class="h-screen flex justify-center items-center mx-auto py-16 gap-2">
+  <section class="container">
+    <section class="w-full flex justify-center mb-10 text-rose-400">
+      <h1 class="font-bold text-4xl">Entrar</h1>
+    </section>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <section class="grid grid-cols-12 gap-2 py-1">
+        <div class="col-span-3"></div>
+        <div class="col-span-6">
+          <div class="w-full py-2">
+            <input formControlName="email" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="E-mail">
+          </div>
+
+          <div class="w-full py-2">
+            <input formControlName="password" type="password" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Senha">
+          </div>
+
+          <div class="w-full py-2">
+            <app-submit-button text="Entrar" type="submit"></app-submit-button>
+          </div>
+
+          <div class="w-full pt-4 flex justify-center">
+            <span class="text-rose-50">
+              Ainda não possui conta? <a class="text-rose-400 hover:text-rose-500" routerLink="/register">Cadastre-se</a>.
+            </span>
+          </div>
+        </div>
+        <div class="col-span-3"></div>
+      </section>
+    </form>
+  </section>
+</main>

@@ -10,8 +10,6 @@ export const CorsConfig = async (app: FastifyInstance<
 >) => {
 	await app
 		.register(fastifyCors, {
-			allowedHeaders: 'Authorization',
-			methods: 'POST,PATCH,GET,OPTIONS,DELETE',
 			origin: '*'
 		})
 }

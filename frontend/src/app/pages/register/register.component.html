@@ -1,0 +1,39 @@
+<main class="h-screen flex justify-center items-center mx-auto py-16 gap-2">
+  <section class="container">
+    <section class="w-full flex justify-center mb-10 text-rose-400">
+      <h1 class="font-bold text-4xl">Cadastre-se</h1>
+    </section>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <section class="grid grid-cols-12 gap-2 py-1">
+        <div class="col-span-3"></div>
+        <div class="col-span-6">
+          <div class="w-full py-2">
+            <input formControlName="email" type="email" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="E-mail">
+          </div>
+
+          <div class="w-full py-2">
+            <input formControlName="password" type="password" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Senha">
+          </div>
+
+          <div class="w-full py-2">
+            <input formControlName="name" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Nome">
+          </div>
+
+          <div class="w-full py-2">
+            <input formControlName="phone" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Telefone">
+          </div>
+
+          <div class="w-full py-2">
+            <app-submit-button text="Cadastre-se" type="submit"></app-submit-button>
+          </div>
+          <div class="w-full pt-4 flex justify-center">
+            <span class="text-rose-50">
+              Já possui conta? <a class="text-rose-400 hover:text-rose-500" routerLink="/">Entre aqui</a>.
+            </span>
+          </div>
+        </div>
+        <div class="col-span-3"></div>
+      </section>
+    </form>
+  </section>
+</main>
