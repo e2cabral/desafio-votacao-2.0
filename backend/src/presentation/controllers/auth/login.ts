@@ -1,15 +1,21 @@
-import {FastifyInstance, FastifyReply, FastifyRequest} from 'fastify'
+import {FastifyReply, FastifyRequest} from 'fastify'
 import {ConvertTo} from '../../helpers/convertion.helper'
 import {UserEntity} from '../../../domain/entities/user.entity'
 import {AuthServiceFactory} from '../../../infra/patterns/factories/auth-service.factory'
 import {logger} from '../../../main/config/logger.config'
 
-export const login = async (request: FastifyRequest, reply: FastifyReply, app: FastifyInstance) => {
+export const login = async (request: FastifyRequest, reply: FastifyReply) => {
 	try {
 		const service = AuthServiceFactory()
 		const user = ConvertTo<Omit<UserEntity, 'name | phone | votes | questions'>>(request.body)
 
-		const token = await service.login(user.email, user.password, app)
+		const token = await service.login(user.email, user.password, request)
+
+		reply.setCookie('access_token', token, {
+			path: '/',
+			httpOnly: true,
+			secure: true,
+		})
 
 		reply.status(200).send({ body: token })
 	} catch (err) {
