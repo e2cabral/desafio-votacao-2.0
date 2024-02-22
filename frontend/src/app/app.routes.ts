@@ -5,6 +5,7 @@ import {HomeComponent} from './pages/home/home.component'
 import {QuestionsVotingComponent} from './pages/questions-voting/questions-voting.component'
 import {authGuard} from './infra/guards/auth.guard'
 import {CreateQuestionComponent} from './pages/create-question/create-question.component'
+import {QuestionComponent} from './pages/question/question.component'
 
 export const routes: Routes = [
 	{ path: '', component: LoginComponent },
@@ -12,4 +13,5 @@ export const routes: Routes = [
 	{ path: 'home', component: HomeComponent, canActivate: [authGuard] },
 	{ path: 'voting', component: QuestionsVotingComponent, canActivate: [authGuard] },
 	{ path: 'create-question', component: CreateQuestionComponent, canActivate: [authGuard] },
+	{ path: 'question/:id', component: QuestionComponent, canActivate: [authGuard] },
 ]

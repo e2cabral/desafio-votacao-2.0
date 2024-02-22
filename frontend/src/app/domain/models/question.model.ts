@@ -20,7 +20,7 @@ export default interface Question {
   name: string,
   description: string,
   sessionTime: SessionTime,
-  votes: Voting[],
+  votes: Voting[] | string[],
   createdBy: User | string,
   sessionStartedDate: string
 }

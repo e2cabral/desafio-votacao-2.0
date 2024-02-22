@@ -56,10 +56,46 @@ export class QuestionsService {
 			)
 	}
 
+	public findById(questionId: string) {
+		return this
+			.http
+			.get(`${this.URL}/v1/question/${questionId}`, this.getHeaders())
+			.pipe(
+				retry(1),
+				catchError(
+					(err) => throwError(() => { err.message })
+				)
+			)
+	}
+
 	public createQuestion(question: Question) {
 		return this
 			.http
 			.post(`${this.URL}/v1/question`, question, this.postHeaders())
+			.pipe(
+				retry(1),
+				catchError(
+					(err) => throwError(() => { err })
+				)
+			)
+	}
+
+	public start(questionId: string) {
+		return this
+			.http
+			.patch(`${this.URL}/v1/question/start/${questionId}`, {}, this.postHeaders())
+			.pipe(
+				retry(1),
+				catchError(
+					(err) => throwError(() => { err })
+				)
+			)
+	}
+
+	public vote(questionId: string, userId: string, answer: string) {
+		return this
+			.http
+			.post(`${this.URL}/v1/vote/${questionId}`, { userId, answer}, this.postHeaders())
 			.pipe(
 				retry(1),
 				catchError(
