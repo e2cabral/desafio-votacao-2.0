@@ -7,21 +7,21 @@ export class LocalStorageService {
 
 	constructor() { }
 
-	get<T>(key: string): T {
+	static get<T>(key: string): T {
 		const item = localStorage.getItem(key)
 
-		return item ? JSON.parse(item) as T : JSON.parse('{}')
+		return item ? JSON.parse(item as string) : null
 	}
 
-	set<T>(key: string, value: T) {
+	static set<T>(key: string, value: T) {
 		localStorage.setItem(key, JSON.stringify(value))
 	}
 
-	unset(key: string) {
+	static unset(key: string) {
 		localStorage.removeItem(key)
 	}
 
-	clear() {
+	static clear() {
 		localStorage.clear()
 	}
 }

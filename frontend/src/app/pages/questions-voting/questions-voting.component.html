@@ -1,1 +1,83 @@
 <app-header></app-header>
+<section class="container mx-auto py-4">
+  <div class="w-full py-4 px-4">
+    @if(questions.length) {
+      <table class="table-fixed w-full text-rose-50">
+        <thead>
+        <tr>
+          <th class="py-4 px-4">Song</th>
+          <th class="py-4 px-4">Artist</th>
+          <th class="py-4 px-4">Year</th>
+        </tr>
+        </thead>
+        <tbody>
+        @for(question of questions; track question._id) {
+          <tr class="bg-rose-400/15 hover:bg-rose-400/25">
+            <td class="py-4 px-4 align">The Sliding Mr. Bones (Next Stop, Pottersville)</td>
+            <td class="py-4 px-4 align">Malcolm Lockyer</td>
+            <td class="py-4 px-4 align">1961</td>
+          </tr>
+        }
+        </tbody>
+      </table>
+    } @else {
+      <section class="p-6 bg-rose-400 text-rose-50 px-16 py-8 rounded-xl">
+        <div class="grid grid-cols-12 flex items-center">
+          <div class="col-span-1">
+            <fa-icon [icon]="sadTearIcon" size="3x"></fa-icon>
+          </div>
+          <div class="col-span-11">
+            <h1 class="font-black text-2xl">
+              Nenhuma votação iniciada.
+            </h1>
+            <span>
+              No momento não há nenhuma votação iniciada. Assim que tivermos votações disponíveis você verá aqui.
+              Você pode criar uma pauta e iníciá-la para que outras pessoas possam votar.
+            </span>
+          </div>
+        </div>
+      </section>
+    }
+
+    <section class="grid grid-cols-12 py-8 flex items-center">
+        <div class="col-span-10 py-4">
+          <h1 class="text-2xl text-rose-400 font-black">
+            Suas Pautas
+          </h1>
+          <div class="w-10 h-0.5 my-2 bg-rose-50"></div>
+        </div>
+        <div class="col-span-2 flex justify-end">
+          <button (click)="navigateToCreateQuestion()" class="text-rose-50 bg-rose-400 h-12 w-12 rounded-3xl flex justify-center items-center cursor-pointer">
+            <fa-icon [icon]="pluIcon" size="xl"></fa-icon>
+          </button>
+        </div>
+      @for(question of creatorQuestions; track question._id) {
+        <div class="col-span-3 bg-rose-50 p-6 rounded-xl">
+          <h1 class="text-rose-400 font-black text-lg w-full">{{ question.name }}</h1>
+          <span class="text-sm text-gray-950 w-full">{{ question.description }}</span>
+          <div class="p-2 mt-2 text-rose-50 font-black text-sm bg-rose-400 flex items-center rounded-md">
+            @if(question.sessionStartedDate) {
+              <div class="text-rose-50 font-black text-sm bg-lime-400 flex items-center rounded-md">
+                <div class="px-1">
+                  <fa-icon [icon]="xMarkIcon" size="sm"></fa-icon>
+                </div>
+                <div class="text-xs">
+                  Iniciada
+                </div>
+              </div>
+            } @else {
+              <div class="text-rose-50 font-black text-sm bg-rose-400 flex items-center rounded-md">
+                <div class="px-1">
+                  <fa-icon [icon]="xMarkIcon" size="sm"></fa-icon>
+                </div>
+                <div class="text-xs">
+                  Não Iniciada
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </section>
+  </div>
+</section>

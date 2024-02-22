@@ -29,7 +29,7 @@ export class AuthService {
 			)
 	}
 
-	public register(user: User) {
+	public register(user: Omit<User, '_id'>) {
 		return this
 			.http
 			.post(`${this.URL}/v1/register`, user, this.HTTP_HEADER)

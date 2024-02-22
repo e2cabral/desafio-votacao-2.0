@@ -5,6 +5,7 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
 import {AuthService} from '../../services/auth.service'
 import {UserAuth} from '../../domain/models/user-auth.model'
 import {LocalStorageService} from '../../services/local-storage.service'
+import {CookieService} from 'ngx-cookie-service'
 
 @Component({
 	selector: 'app-login',
@@ -14,7 +15,7 @@ import {LocalStorageService} from '../../services/local-storage.service'
 	styleUrl: './login.component.css'
 })
 export class LoginComponent {
-	constructor(private auth: AuthService, private router: Router, private localStorage: LocalStorageService) {
+	constructor(private auth: AuthService, private router: Router, private cookie: CookieService) {
 	}
 
 	public form = new FormGroup({
@@ -36,8 +37,9 @@ export class LoginComponent {
 			.auth
 			.login(user)
 			.subscribe(res => {
-				const body = (res as { body: string }).body
-				this.localStorage.set('@auth', body)
+				const body = (res as { body: { token: string } }).body
+				LocalStorageService.set('@auth', body)
+				this.cookie.set('access_token', body.token, undefined, '/', undefined, true)
 				this.router.navigate(['/home'])
 
 				return

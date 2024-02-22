@@ -37,7 +37,7 @@ export class RegisterComponent {
 			return
 		}
 
-		const user: User = {
+		const user: Omit<User, '_id'> = {
 			email: this.form.value.email!,
 			password: this.form.value.password!,
 			name: this.form.value.name!,
