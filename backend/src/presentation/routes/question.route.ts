@@ -53,7 +53,6 @@ export const QuestionRoutes = (app: FastifyInstance, _: RouteShorthandOptions, d
 		.get(
 			'/question/:questionId',
 			{
-				onRequest: app.authenticate,
 				schema: {
 					tags: ['Question']
 				}
