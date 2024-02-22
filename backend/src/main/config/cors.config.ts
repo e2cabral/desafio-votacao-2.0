@@ -10,6 +10,24 @@ export const CorsConfig = async (app: FastifyInstance<
 >) => {
 	await app
 		.register(fastifyCors, {
-			origin: '*'
+			credentials: true,
+			origin: ['http://localhost:4200'],
+			methods: ['GET', 'PUT', 'POST', 'DELETE'],
+			allowedHeaders: [
+				'Content-Type',
+				'Accept',
+				'Authorization',
+				'Host',
+				'User-Agent',
+				'Accept-Language',
+				'Accept-Encoding',
+				'Authorization',
+				'Origin',
+				'Connection',
+				'Referer',
+				'Sec-Fetch-Dest',
+				'Sec-Fetch-Mode',
+				'Sec-Fetch-Site',
+			]
 		})
 }
