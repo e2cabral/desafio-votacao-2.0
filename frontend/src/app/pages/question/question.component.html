@@ -1,5 +1,17 @@
 <app-header></app-header>
 <section class="container mx-auto">
+  <div class="grid grid-cols-12">
+    <div class="col-span-6">
+      <span class="text-8xl text-lime-400 font-extrabold flex justify-center">
+        <span class="font-light px-4">SIM</span> {{yesVotes}}%
+      </span>
+    </div>
+    <div class="col-span-6">
+      <span class="text-8xl text-rose-400 font-extrabold flex justify-center">
+        <span class="font-light px-4">NÃO</span> {{noVotes}}%
+      </span>
+    </div>
+  </div>
   <div class="grid grid-cols-12 pt-24">
     <div class="col-span-12 pb-4">
       <h2 class="text-rose-50 text-2xl font-bold">
@@ -104,7 +116,13 @@
       </div>
     </div>
 
-      @if(!question?.sessionStartedDate) {
+      @if(!checkIsFinished(question?.sessionStartedDate)) {
+        <div class="opacity-45 col-span-12 bg-rose-400 py-4 px-4 flex justify-center rounded-md mt-6">
+          <span class="text-rose-50 text-lg">
+            Votação finalizada!
+          </span>
+        </div>
+      } @else if(!question?.sessionStartedDate) {
       <div class="col-span-4 mt-8">
         <button  (click)="start()" class="bg-rose-400 text-rose-50 rounded-md py-2 px-4">
           Iniciar Votação

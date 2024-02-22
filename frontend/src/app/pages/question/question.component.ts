@@ -6,6 +6,7 @@ import Question, {SessionTime, Voting} from '../../domain/models/question.model'
 import {User} from '../../domain/models/user.model'
 import {ToastService} from '../../services/toast.service'
 import {LocalStorageService} from '../../services/local-storage.service'
+import {QuestionWithPercentage} from '../../domain/types/questions-return.type'
 
 @Component({
 	selector: 'app-question',
@@ -28,12 +29,17 @@ export class QuestionComponent implements OnInit{
 
 	public questionId: string = ''
 	public question: Question | undefined
+	public yesVotes: number = 0
+	public noVotes: number = 0
 
 	public findById(id: string) {
 		this.questionService
 			.findById(id)
 			.subscribe(res => {
-				this.question = (res as unknown as { body: Question }).body
+				const { question, yesVotesPercentage, noVotesPercentage } = (res as unknown as QuestionWithPercentage).body
+				this.question = question
+				this.yesVotes = yesVotesPercentage
+				this.noVotes = noVotesPercentage
 			})
 	}
 
@@ -101,5 +107,14 @@ export class QuestionComponent implements OnInit{
 			return !!(this.question?.votes as Voting[]).find((v) => v.userId === user.id)
 		}
 		return false
+	}
+
+	checkIsFinished(dateFinish: string | undefined) {
+		if (!dateFinish) return true
+
+		const today = new Date()
+		const dateShouldFinish = new Date(dateFinish)
+
+		return dateShouldFinish > today
 	}
 }

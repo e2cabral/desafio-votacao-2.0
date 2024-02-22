@@ -4,8 +4,8 @@
     @if(questions.length) {
       <div class="grid grid-cols-12 gap-2">
         @for(question of questions; track question._id) {
-          <div class="col-span-4 bg-rose-50 p-4 rounded-xl h-86" [ngClass]="{ 'opacity-60 cursor-not-allowed': !checkIsFinished(question.sessionStartedDate) }">
-            <a [routerLink]="['/question', question._id]" [ngStyle]="{pointerEvents: checkIsFinished(question.sessionStartedDate) ? 'auto' : 'none'}">
+          <div class="col-span-4 bg-rose-50 p-4 rounded-xl h-86" [ngClass]="{ 'opacity-75': !checkIsFinished(question.sessionStartedDate) }">
+            <a [routerLink]="['/question', question._id]">
               <div class="grid grid-cols-12 gap-2">
                 <div class="col-span-8">
                   <h1 class="text-rose-400 font-black text-lg w-full">{{ reduceText(question.name) }}</h1>
