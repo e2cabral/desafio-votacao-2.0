@@ -1,0 +1,70 @@
+<app-header></app-header>
+<main class="flex justify-center items-center mx-auto pt-20 gap-2">
+  <section class="container">
+    <section class="w-full flex justify-center mb-10 text-rose-400">
+      <h1 class="font-bold text-4xl">Cadastrar Pauta</h1>
+    </section>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <section class="grid grid-cols-12 gap-2 py-1">
+        <div class="col-span-2"></div>
+        <div class="col-span-8">
+          <div class="w-full py-2">
+            <input formControlName="name" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Nome da pauta">
+          </div>
+
+          <div class="w-full py-2">
+            <input formControlName="description" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Descrição">
+          </div>
+
+          <div class="grid grid-cols-12 gap-2">
+            <div class="col-span-12">
+              <h3 class="text-rose-400 font-bold pt-6">
+                Selecione o tempo de duração da pauta
+              </h3>
+            </div>
+            <div class="col-span-2">
+              <div class="w-full py-2">
+                <input formControlName="year" min="0" max="5" type="number" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Ano">
+              </div>
+            </div>
+
+            <div class="col-span-2">
+              <div class="w-full py-2">
+                <input formControlName="month" min="0" max="12" type="number" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Mês">
+              </div>
+            </div>
+
+            <div class="col-span-2">
+              <div class="w-full py-2">
+                <input formControlName="day" min="0" max="31" type="number" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Dia">
+              </div>
+            </div>
+
+            <div class="col-span-2">
+              <div class="w-full py-2">
+                <input formControlName="hour" min="0" max="24" type="number" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Hora">
+              </div>
+            </div>
+
+            <div class="col-span-2">
+              <div class="w-full py-2">
+                <input formControlName="minutes" min="0" max="60" type="number" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Minutos">
+              </div>
+            </div>
+
+            <div class="col-span-2">
+              <div class="w-full py-2">
+                <input formControlName="seconds" min="0" max="60" type="number" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Segundos">
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full py-2">
+            <app-submit-button text="Cadastrar" type="submit"></app-submit-button>
+          </div>
+        </div>
+        <div class="col-span-2"></div>
+      </section>
+    </form>
+  </section>
+</main>
