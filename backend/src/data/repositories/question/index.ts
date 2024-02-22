@@ -68,4 +68,16 @@ export namespace Question {
 			logger.error((err as Error).message)
 		}
 	}
+
+	export const findById = (questionId: string) => {
+		try {
+			return QuestionModel
+				.findOne({ _id: questionId })
+				.populate('votes')
+				.populate('createdBy')
+				.exec()
+		} catch (err) {
+			logger.error((err as Error).message)
+		}
+	}
 }

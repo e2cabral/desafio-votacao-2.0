@@ -97,4 +97,12 @@ export namespace QuestionService {
 			logger.error((err as Error).message)
 		}
 	}
+
+	export const findById = async (questionId: string)=> {
+		try {
+			return Question.findById(questionId)
+		} catch (err) {
+			logger.error((err as Error).message)
+		}
+	}
 }
