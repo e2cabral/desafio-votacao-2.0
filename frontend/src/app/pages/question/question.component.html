@@ -1,145 +1,172 @@
 <app-header></app-header>
 <section class="container mx-auto">
-  <div class="grid grid-cols-12">
-    <div class="col-span-6">
-      <span class="text-8xl text-lime-400 font-extrabold flex justify-center">
-        <span class="font-light px-4">SIM</span> {{yesVotes}}%
-      </span>
-    </div>
-    <div class="col-span-6">
-      <span class="text-8xl text-rose-400 font-extrabold flex justify-center">
-        <span class="font-light px-4">NÃO</span> {{noVotes}}%
-      </span>
-    </div>
-  </div>
-  <div class="grid grid-cols-12 pt-24">
-    <div class="col-span-12 pb-4">
-      <h2 class="text-rose-50 text-2xl font-bold">
-        Informações da Pauta
-      </h2>
-    </div>
-
-    <div class="col-span-4">
-      <div class="grid grid-cols-12">
-        <div class="col-span-12">
-          <span class="text-rose-400 font-black">
-            Título:
-          </span>
-        </div>
-        <div class="col-span-12">
-          <span class="text-rose-400 font-black">
-            <span class="text-rose-50 font-light">{{ question?.name }}</span>
-          </span>
-        </div>
+  @if(checkLoggedUser() || verifyCpf()) {
+    <div class="grid grid-cols-12">
+      <div class="col-span-6">
+        <span class="text-8xl text-lime-400 font-extrabold flex justify-center">
+          <span class="font-light px-4">SIM</span> {{yesVotes}}%
+        </span>
+      </div>
+      <div class="col-span-6">
+        <span class="text-8xl text-rose-400 font-extrabold flex justify-center">
+          <span class="font-light px-4">NÃO</span> {{noVotes}}%
+        </span>
       </div>
     </div>
-
-    <div class="col-span-4">
-      <div class="grid grid-cols-12">
-        <div class="col-span-12">
-          <span class="text-rose-400 font-black">
-            Descrição:
-          </span>
-        </div>
-        <div class="col-span-12">
-          <span class="text-rose-400 font-black">
-            <span class="text-rose-50 font-light">{{ question?.description }}</span>
-          </span>
-        </div>
+    <div class="grid grid-cols-12 pt-24">
+      <div class="col-span-12 pb-4">
+        <h2 class="text-rose-50 text-2xl font-bold">
+          Informações da Pauta
+        </h2>
       </div>
-    </div>
 
-    <div class="col-span-4">
-      <div class="grid grid-cols-12">
-        <div class="col-span-12">
-          <span class="text-rose-400 font-black">
-            Duração:
-          </span>
-        </div>
-        <div class="col-span-12">
-          <span class="text-rose-400 font-black">
-            <span class="text-rose-50 font-light">{{ formatSessionTime(question?.sessionTime) }}</span>
-          </span>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-span-12 mt-8 py-8 px-10 bg-rose-950/25 rounded-2xl">
-      <div class="grid grid-cols-12">
-        <div class="col-span-12 pb-4">
-          <h3 class="font-bold text-2xl text-rose-400">Autor</h3>
-        </div>
-        <div class="col-span-4">
-          <div class="grid grid-cols-12">
-            <div class="col-span-12">
+      <div class="col-span-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-12">
             <span class="text-rose-400 font-black">
-              Nome:
+              Título:
             </span>
-            </div>
-            <div class="col-span-12">
-            <span class="text-rose-400 font-black">
-              <span class="text-rose-50 font-light">{{ getCreator()?.name }}</span>
-            </span>
-            </div>
           </div>
-        </div>
-
-        <div class="col-span-4">
-          <div class="grid grid-cols-12">
-            <div class="col-span-12">
+          <div class="col-span-12">
             <span class="text-rose-400 font-black">
-              E-mail:
+              <span class="text-rose-50 font-light">{{ question?.name }}</span>
             </span>
-            </div>
-            <div class="col-span-12">
-            <span class="text-rose-400 font-black">
-              <span class="text-rose-50 font-light">{{ getCreator()?.email }}</span>
-            </span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-span-4">
-          <div class="grid grid-cols-12">
-            <div class="col-span-12">
-            <span class="text-rose-400 font-black">
-              Telefone:
-            </span>
-            </div>
-            <div class="col-span-12">
-            <span class="text-rose-400 font-black">
-              <span class="text-rose-50 font-light">{{ getCreator()?.phone }}</span>
-            </span>
-            </div>
           </div>
         </div>
       </div>
-    </div>
 
-      @if(!checkIsFinished(question?.sessionStartedDate)) {
-        <div class="opacity-45 col-span-12 bg-rose-400 py-4 px-4 flex justify-center rounded-md mt-6">
-          <span class="text-rose-50 text-lg">
-            Votação finalizada!
-          </span>
+      <div class="col-span-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-12">
+            <span class="text-rose-400 font-black">
+              Descrição:
+            </span>
+          </div>
+          <div class="col-span-12">
+            <span class="text-rose-400 font-black">
+              <span class="text-rose-50 font-light">{{ question?.description }}</span>
+            </span>
+          </div>
         </div>
-      } @else if(!question?.sessionStartedDate) {
-      <div class="col-span-4 mt-8">
-        <button  (click)="start()" class="bg-rose-400 text-rose-50 rounded-md py-2 px-4">
-          Iniciar Votação
-        </button>
       </div>
-      } @else {
-        <div class="col-span-1 mt-8">
-          <button [disabled]="checkVoted()" (click)="vote('Sim')" class="bg-rose-400 border-rose-400 border-2 text-rose-50 rounded-md py-2 px-6 disabled:bg-rose-400/25 disabled:border-rose-400/20 disabled:text-rose-50/25 disabled:cursor-not-allowed">
-            Sim
-          </button>
+
+      <div class="col-span-4">
+        <div class="grid grid-cols-12">
+          <div class="col-span-12">
+            <span class="text-rose-400 font-black">
+              Duração:
+            </span>
+          </div>
+          <div class="col-span-12">
+            <span class="text-rose-400 font-black">
+              <span class="text-rose-50 font-light">{{ formatSessionTime(question?.sessionTime) }}</span>
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-span-12 mt-8 py-8 px-10 bg-rose-950/25 rounded-2xl">
+        <div class="grid grid-cols-12">
+          <div class="col-span-12 pb-4">
+            <h3 class="font-bold text-2xl text-rose-400">Autor</h3>
+          </div>
+          <div class="col-span-4">
+            <div class="grid grid-cols-12">
+              <div class="col-span-12">
+              <span class="text-rose-400 font-black">
+                Nome:
+              </span>
+              </div>
+              <div class="col-span-12">
+              <span class="text-rose-400 font-black">
+                <span class="text-rose-50 font-light">{{ getCreator()?.name }}</span>
+              </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-4">
+            <div class="grid grid-cols-12">
+              <div class="col-span-12">
+              <span class="text-rose-400 font-black">
+                E-mail:
+              </span>
+              </div>
+              <div class="col-span-12">
+              <span class="text-rose-400 font-black">
+                <span class="text-rose-50 font-light">{{ getCreator()?.email }}</span>
+              </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-span-4">
+            <div class="grid grid-cols-12">
+              <div class="col-span-12">
+              <span class="text-rose-400 font-black">
+                Telefone:
+              </span>
+              </div>
+              <div class="col-span-12">
+              <span class="text-rose-400 font-black">
+                <span class="text-rose-50 font-light">{{ getCreator()?.phone }}</span>
+              </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+        @if(!checkIsFinished(question?.sessionStartedDate)) {
+          <div class="opacity-45 col-span-12 bg-rose-400 py-4 px-4 flex justify-center rounded-md mt-6">
+            <span class="text-rose-50 text-lg">
+              Votação finalizada!
+            </span>
+          </div>
+        } @else if(!question?.sessionStartedDate) {
+          @if(checkLoggedUser()) {
+            <div class="col-span-4 mt-8">
+              <button  (click)="start()" class="bg-rose-400 text-rose-50 rounded-md py-2 px-4">
+                Iniciar Votação
+              </button>
+            </div>
+          } @else {
+            <div class="opacity-45 col-span-12 bg-rose-400 py-4 px-4 flex justify-center rounded-md mt-6">
+            <span class="text-rose-50 text-lg">
+              A votação ainda não foi iniciada
+            </span>
+            </div>
+          }
+        } @else {
+          <div class="col-span-1 mt-8">
+            <button [disabled]="checkVoted()" (click)="vote('Sim')" class="bg-rose-400 border-rose-400 border-2 text-rose-50 rounded-md py-2 px-6 disabled:bg-rose-400/25 disabled:border-rose-400/20 disabled:text-rose-50/25 disabled:cursor-not-allowed">
+              Sim
+            </button>
+          </div>
+
+          <div class="col-span-1 mt-8">
+            <button [disabled]="checkVoted()" (click)="vote('Não')" class="bg-transparent border-rose-400 border-2 box-border text-rose-400 rounded-md py-2 px-6 disabled:border-rose-400/20 disabled:text-rose-400/25 disabled:cursor-not-allowed">
+              Não
+            </button>
+          </div>
+        }
+
+    </div>
+  } @else {
+  <form [formGroup]="newForm" (ngSubmit)="checkToVote()">
+    <section class="grid grid-cols-12 gap-2 py-1 mt-24">
+      <div class="col-span-2"></div>
+      <div class="col-span-8">
+        <div class="w-full py-2">
+          <input formControlName="cpf" maxlength="11" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Digite o seu CPF para votar">
         </div>
 
-        <div class="col-span-1 mt-8">
-          <button [disabled]="checkVoted()" (click)="vote('Não')" class="bg-transparent border-rose-400 border-2 box-border text-rose-400 rounded-md py-2 px-6 disabled:border-rose-400/20 disabled:text-rose-400/25 disabled:cursor-not-allowed">
-            Não
-          </button>
+        <div class="w-full py-2">
+          <app-submit-button text="Quero votar" type="submit"></app-submit-button>
         </div>
-      }
-  </div>
+      </div>
+      <div class="col-span-2"></div>
+    </section>
+  </form>
+}
 </section>

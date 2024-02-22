@@ -54,6 +54,7 @@ export class CreateQuestionComponent {
 
 		return
 	}
+
 	public form = new FormGroup({
 		name: new FormControl('', { validators: [Validators.nullValidator] }),
 		description: new FormControl('', { validators: [Validators.nullValidator] }),

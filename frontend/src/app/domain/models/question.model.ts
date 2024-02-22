@@ -11,7 +11,7 @@ export interface SessionTime {
 
 export interface Voting {
   _id: string
-  userId: string
+  cpf: string
   answer: string
 }
 

@@ -7,12 +7,16 @@ import {User} from '../../domain/models/user.model'
 import {ToastService} from '../../services/toast.service'
 import {LocalStorageService} from '../../services/local-storage.service'
 import {QuestionWithPercentage} from '../../domain/types/questions-return.type'
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
+import {SubmitButtonComponent} from '../../components/submit-button/submit-button.component'
 
 @Component({
 	selector: 'app-question',
 	standalone: true,
 	imports: [
-		HeaderComponent
+		HeaderComponent,
+		ReactiveFormsModule,
+		SubmitButtonComponent
 	],
 	templateUrl: './question.component.html',
 	styleUrl: './question.component.css'
@@ -89,10 +93,10 @@ export class QuestionComponent implements OnInit{
 	}
 
 	public vote(answer: string) {
-		const { id } = LocalStorageService.get<{ id: string }>('@auth')
+		const cpf = LocalStorageService.get<string>('@cpf')
 		this
 			.questionService
-			.vote(this.questionId, id, answer)
+			.vote(this.questionId, cpf, answer)
 			.subscribe(() => {
 				this
 					.toast
@@ -101,10 +105,14 @@ export class QuestionComponent implements OnInit{
 			})
 	}
 
+	checkLoggedUser() {
+		return LocalStorageService.get('@auth')
+	}
+
 	checkVoted() {
-		const user = LocalStorageService.get<{ id: string }>('@auth')
-		if (user) {
-			return !!(this.question?.votes as Voting[]).find((v) => v.userId === user.id)
+		const cpf = LocalStorageService.get('@cpf')
+		if (cpf) {
+			return !!(this.question?.votes as Voting[]).find((v) => v.cpf === cpf)
 		}
 		return false
 	}
@@ -117,4 +125,28 @@ export class QuestionComponent implements OnInit{
 
 		return dateShouldFinish > today
 	}
+
+	verifyCpf() {
+		return LocalStorageService.get('@cpf')
+	}
+
+	public checkToVote() {
+		console.log(this.newForm.invalid)
+		if (this.newForm.invalid) {
+			this.toast.error('CPF inválido', '')
+			return
+		}
+
+		LocalStorageService.set('@cpf', this.newForm.value.cpf)
+	}
+
+	public newForm = new FormGroup({
+		cpf: new FormControl('', { validators: [
+			Validators.required,
+			Validators.pattern(/^\d{11}$/),
+			Validators.minLength(11),
+			Validators.maxLength(11),
+			Validators.nullValidator,
+		]})
+	})
 }

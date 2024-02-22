@@ -107,10 +107,10 @@ export class QuestionsVotingComponent implements OnInit {
 	}
 
 	checkVoted(questionId: string | undefined) {
-		const user = LocalStorageService.get<{ id: string }>('@auth')
-		if (user) {
+		const cpf = LocalStorageService.get('@cpf')
+		if (cpf) {
 			const question = this.questions.find(q => q._id === questionId)
-			return !!(question?.votes as Voting[]).find((v) => v.userId === user.id)
+			return !!(question?.votes as Voting[]).find((v) => v.cpf === cpf)
 		}
 		return false
 	}

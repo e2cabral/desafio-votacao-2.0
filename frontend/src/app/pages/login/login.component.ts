@@ -40,7 +40,7 @@ export class LoginComponent {
 				const body = (res as { body: { token: string } }).body
 				LocalStorageService.set('@auth', body)
 				this.cookie.set('access_token', body.token, undefined, '/', undefined, true)
-				this.router.navigate(['/home'])
+				this.router.navigate(['/voting'])
 
 				return
 			})

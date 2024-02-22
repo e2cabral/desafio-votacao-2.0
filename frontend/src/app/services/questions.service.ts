@@ -32,6 +32,14 @@ export class QuestionsService {
 		return { withCredentials: true, headers }
 	}
 
+	private noAuthHeaders(): any {
+		const headers = new HttpHeaders({
+			'Content-Type': 'application/json'
+		})
+
+		return { headers }
+	}
+
 	public findStarted(page: number, itemsPerPage: number) {
 		return this
 			.http
@@ -59,7 +67,7 @@ export class QuestionsService {
 	public findById(questionId: string) {
 		return this
 			.http
-			.get(`${this.URL}/v1/question/${questionId}`, this.getHeaders())
+			.get(`${this.URL}/v1/question/${questionId}`, this.noAuthHeaders())
 			.pipe(
 				retry(1),
 				catchError(
@@ -92,10 +100,10 @@ export class QuestionsService {
 			)
 	}
 
-	public vote(questionId: string, userId: string, answer: string) {
+	public vote(questionId: string, cpf: string, answer: string) {
 		return this
 			.http
-			.post(`${this.URL}/v1/vote/${questionId}`, { userId, answer}, this.postHeaders())
+			.post(`${this.URL}/v1/vote/${questionId}`, { cpf, answer}, this.noAuthHeaders())
 			.pipe(
 				retry(1),
 				catchError(

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core'
 import {RouterLink} from '@angular/router'
 import {BaseLinkComponent} from '../base-link/base-link.component'
+import {LocalStorageService} from '../../services/local-storage.service'
 
 @Component({
 	selector: 'app-header',
@@ -13,5 +14,9 @@ import {BaseLinkComponent} from '../base-link/base-link.component'
 	styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+
+	checkLoggedUser() {
+		return LocalStorageService.get('@auth')
+	}
 
 }
