@@ -10,7 +10,7 @@ export interface SessionTime {
 }
 
 export interface VotingEntity {
-    userId: mongoose.ObjectId
+    cpf: string
     answer: string
 }
 
