@@ -69,13 +69,26 @@ export namespace Question {
 		}
 	}
 
-	export const findById = (questionId: string) => {
+	export const findById = async (questionId: string) => {
 		try {
-			return QuestionModel
+			const question = await QuestionModel
 				.findOne({ _id: questionId })
 				.populate('votes')
 				.populate('createdBy')
 				.exec()
+
+			if (question?.votes.length) {
+				const yesVotes = question?.votes.filter((vote: any) => vote.answer === 'Sim').length
+				const noVotes = question?.votes.filter((vote: any) => vote.answer === 'Não').length
+				const totalVotes = yesVotes + noVotes
+
+				const yesVotesPercentage = (yesVotes / totalVotes) * 100
+				const noVotesPercentage = (noVotes / totalVotes) * 100
+
+				return { question, yesVotesPercentage, noVotesPercentage }
+			}
+
+			return { question, yesVotesPercentage: 0, noVotesPercentage: 0 }
 		} catch (err) {
 			logger.error((err as Error).message)
 		}
