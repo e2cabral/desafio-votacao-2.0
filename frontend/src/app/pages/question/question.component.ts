@@ -28,6 +28,18 @@ export class QuestionComponent implements OnInit{
 			this.questionId = data['id']
 			this.findById(data['id'])
 		})
+
+		const canVote = LocalStorageService.get<boolean>('@can-vote')
+		const logged = LocalStorageService.get('@auth')
+
+		if (logged) {
+			this.userCanVote =true
+		}
+
+		if (canVote) {
+			LocalStorageService.unset('@cpf')
+			this.userCanVote = canVote
+		}
 	}
 	constructor(private questionService: QuestionsService, private voteService: VoteService, private active: ActivatedRoute, private toast: ToastService) {
 	}
@@ -103,7 +115,9 @@ export class QuestionComponent implements OnInit{
 				this
 					.toast
 					.success('Voto contabilizado com sucesso', '')
-					.onHidden.subscribe(() => location.reload())
+					.onHidden.subscribe(() => {
+						location.reload()
+					})
 			})
 	}
 
@@ -151,6 +165,7 @@ export class QuestionComponent implements OnInit{
 				.subscribe((canVote: any) => {
 					this.userCanVote = (canVote as { body: boolean }).body
 					LocalStorageService.set('@cpf', this.newForm.value.cpf)
+					LocalStorageService.set('@can-vote', this.userCanVote)
 				})
 		}
 	}
