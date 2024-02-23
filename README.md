@@ -29,8 +29,8 @@ Possíveis melhorias:
 Para iniciar o banco de dados:
 ```shell
 docker run -d --network some-network --name some-mongo \
-	-e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
-	-e MONGO_INITDB_ROOT_PASSWORD=secret \
+	-e MONGO_INITDB_ROOT_USERNAME=username \
+	-e MONGO_INITDB_ROOT_PASSWORD=password \
 	-e MONGO_INITDB_DATABASE=questions
 	mongo
 ```
