@@ -22,7 +22,7 @@ export const VotingRoutes = (app: FastifyInstance, _: RouteShorthandOptions, don
 			registerVoter
 		)
 		.get(
-			'/vote/voter/valid',
+			'/vote/voter/:cpf/can',
 			{
 				schema: {
 					tags: ['Vote']
