@@ -3,3 +3,7 @@ export interface VotingEntity {
     answer: string
 }
 
+export interface VoterEntity {
+    cpf: string
+    name: string
+}
