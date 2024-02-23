@@ -3,14 +3,8 @@
 POST http://localhost:3000/v1/register
 Content-Type: application/json
 
-{
-  "name": "Maria das Couves",
-  "email": "m.couves@teste.com.br",
-  "password": "senhalegal",
-  "phone": "5511912345678",
-  "votes": [],
-  "questions": []
-}
+{"name": "Maria das Couves", "email": "m.couves@teste.com.br", "password": "senhalegal", "phone": "5511912345678", "votes": [], "questions": []}
+
 
 
 ### LOGIN
@@ -18,10 +12,7 @@ Content-Type: application/json
 POST http://localhost:3000/v1/login
 Content-Type: application/json
 
-{
-  "email": "j.couves@teste.com.br",
-  "password": "senhalegal"
-}
+{"email": "j.couves@teste.com.br", "password": "senhalegal"}
 
 
 
@@ -31,21 +22,7 @@ POST http://localhost:3000/v1/question
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoibS5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ1ZjBkNTk4ZTU3MTIyYjgwMWFhOTUifSwiaWF0IjoxNzA4NTE5Njg1fQ.GkD8TzZyihgLDGyR_fhW8cl9Ke15QNSCZwM06UTSaT8
 
-{
-  "name": "Pintar o cabelo após os 30",
-  "description": "Uma pessoa com mais de 30 anos deve pintar o cabelo",
-  "sessionTime": {
-    "year": 0,
-    "month": 0,
-    "day": 0,
-    "hour": 1,
-    "minutes": 30,
-    "seconds": 47
-  },
-  "votes": [],
-  "createdBy": "65d5f12598e57122b801aa98",
-  "sessionStartedDate": null
-}
+{"name": "Pintar o cabelo após os 30", "description": "Uma pessoa com mais de 30 anos deve pintar o cabelo", "sessionTime": { "year": 0, "month": 0, "day": 0, "hour": 1, "minutes": 30, "seconds": 47 }, "votes": [], "createdBy": "65d5f12598e57122b801aa98", "sessionStartedDate": null}
 
 
 
@@ -53,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtY
 
 PATCH http://localhost:3000/v1/question/start/65d53d2e8c748aa4394d397f
 Accept: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoibS5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ1ZjBkNTk4ZTU3MTIyYjgwMWFhOTUifSwiaWF0IjoxNzA4NTE5Njg1fQ.GkD8TzZyihgLDGyR_fhW8cl9Ke15QNSCZwM06UTSaT8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiai5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ3YmIzNGY0OTJhMjMzZjYxMTI4OTIiLCJwYXNzd29yZCI6IiQyYiQxMCRYMUpTUVJoekVGTk9sYy81VUxwNDguRklEMUJadGp2b3dQQWJrRnB1RzNqamp2bG85MktCZSJ9LCJpYXQiOjE3MDg2OTk4Nzd9.d6srcur8Bfq10H0chqSPyLg9XrsgiDwZflQqmregjXw
 
 
 
@@ -78,10 +55,8 @@ POST http://localhost:3000/v1/vote/65d7c574f492a233f611289b
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiai5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ3YmIzNGY0OTJhMjMzZjYxMTI4OTIiLCJwYXNzd29yZCI6IiQyYiQxMCRYMUpTUVJoekVGTk9sYy81VUxwNDguRklEMUJadGp2b3dQQWJrRnB1RzNqamp2bG85MktCZSJ9LCJpYXQiOjE3MDg2OTk4Nzd9.d6srcur8Bfq10H0chqSPyLg9XrsgiDwZflQqmregjXw
 
-{
-  "cpf": "91320025056",
-  "answer": "Sim"
-}
+{"cpf": "91320025056", "answer": "Sim"}
+
 
 
 ### REGISTER VOTER
@@ -89,10 +64,8 @@ POST http://localhost:3000/v1/vote/voter
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiai5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ3YmIzNGY0OTJhMjMzZjYxMTI4OTIiLCJwYXNzd29yZCI6IiQyYiQxMCRYMUpTUVJoekVGTk9sYy81VUxwNDguRklEMUJadGp2b3dQQWJrRnB1RzNqamp2bG85MktCZSJ9LCJpYXQiOjE3MDg2OTk4Nzd9.d6srcur8Bfq10H0chqSPyLg9XrsgiDwZflQqmregjXw
 
-{
-  "cpf": "91320025056",
-  "name": "João das Couves"
-}
+{"cpf": "91320025056", "name": "João das Couves"}
+
 
 
 ### CAN VOTE
