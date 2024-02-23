@@ -19,7 +19,7 @@ POST http://localhost:3000/v1/login
 Content-Type: application/json
 
 {
-  "email": "m.couves@teste.com.br",
+  "email": "j.couves@teste.com.br",
   "password": "senhalegal"
 }
 
@@ -74,11 +74,28 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtY
 
 
 ### VOTE
-POST http://localhost:3000/v1/vote/65d53d2e8c748aa4394d397f
+POST http://localhost:3000/v1/vote/65d7c574f492a233f611289b
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoibS5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ1ZjBkNTk4ZTU3MTIyYjgwMWFhOTUifSwiaWF0IjoxNzA4NTE5Njg1fQ.GkD8TzZyihgLDGyR_fhW8cl9Ke15QNSCZwM06UTSaT8
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiai5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ3YmIzNGY0OTJhMjMzZjYxMTI4OTIiLCJwYXNzd29yZCI6IiQyYiQxMCRYMUpTUVJoekVGTk9sYy81VUxwNDguRklEMUJadGp2b3dQQWJrRnB1RzNqamp2bG85MktCZSJ9LCJpYXQiOjE3MDg2OTk4Nzd9.d6srcur8Bfq10H0chqSPyLg9XrsgiDwZflQqmregjXw
 
 {
-  "userId": "65d52f2fc00aec119e7de0ac",
+  "cpf": "91320025056",
   "answer": "Sim"
 }
+
+
+### REGISTER VOTER
+POST http://localhost:3000/v1/vote/voter
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiai5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ3YmIzNGY0OTJhMjMzZjYxMTI4OTIiLCJwYXNzd29yZCI6IiQyYiQxMCRYMUpTUVJoekVGTk9sYy81VUxwNDguRklEMUJadGp2b3dQQWJrRnB1RzNqamp2bG85MktCZSJ9LCJpYXQiOjE3MDg2OTk4Nzd9.d6srcur8Bfq10H0chqSPyLg9XrsgiDwZflQqmregjXw
+
+{
+  "cpf": "91320025056",
+  "name": "João das Couves"
+}
+
+
+### CAN VOTE
+GET http://localhost:3000/v1/vote/voter/91320025056/can
+Accept: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7ImVtYWlsIjoiai5jb3V2ZXNAdGVzdGUuY29tLmJyIiwiaWQiOiI2NWQ3YmIzNGY0OTJhMjMzZjYxMTI4OTIiLCJwYXNzd29yZCI6IiQyYiQxMCRYMUpTUVJoekVGTk9sYy81VUxwNDguRklEMUJadGp2b3dQQWJrRnB1RzNqamp2bG85MktCZSJ9LCJpYXQiOjE3MDg2OTk4Nzd9.d6srcur8Bfq10H0chqSPyLg9XrsgiDwZflQqmregjXw
