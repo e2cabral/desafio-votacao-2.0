@@ -1,0 +1,20 @@
+<app-header></app-header>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <section class="grid grid-cols-12 gap-2 py-1 mt-24">
+    <div class="col-span-2"></div>
+    <div class="col-span-8">
+      <div class="w-full py-2">
+        <input formControlName="name" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="Nome">
+      </div>
+
+      <div class="w-full py-2">
+        <input formControlName="cpf" maxlength="11" type="text" class="rounded-md px-4 py-4 w-full bg-rose-50" placeholder="CPF">
+      </div>
+
+      <div class="w-full py-2">
+        <app-submit-button text="Cadastrar" type="submit"></app-submit-button>
+      </div>
+    </div>
+    <div class="col-span-2"></div>
+  </section>
+</form>
