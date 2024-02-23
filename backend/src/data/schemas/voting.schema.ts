@@ -1,5 +1,5 @@
 import mongoose, {Schema} from 'mongoose'
-import {VotingEntity} from '../../domain/entities/question.entity'
+import {VotingEntity} from '../../domain/entities/voting.entity'
 
 export const Voting = new Schema<VotingEntity>({
 	cpf: { type: 'String', required: true },

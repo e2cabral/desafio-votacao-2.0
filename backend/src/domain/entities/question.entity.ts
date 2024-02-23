@@ -9,11 +9,6 @@ export interface SessionTime {
     seconds: number
 }
 
-export interface VotingEntity {
-    cpf: string
-    answer: string
-}
-
 export default interface QuestionEntity {
     name: string,
     description: string,
