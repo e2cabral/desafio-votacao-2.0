@@ -41,7 +41,14 @@ export class CreateQuestionComponent {
 			.createQuestion({
 				name: name!,
 				description: description!,
-				sessionTime: { year, month, day, hour, minutes, seconds },
+				sessionTime: {
+					year: year ? year : 0,
+					month: month ? month : 0,
+					day: day ? day : 0,
+					hour: hour ? hour : 0,
+					minutes: minutes ? minutes : 0,
+					seconds: seconds ? seconds : 0
+				},
 				votes: votes!,
 				createdBy: createdBy!,
 				sessionStartedDate: sessionStartedDate!
@@ -49,7 +56,7 @@ export class CreateQuestionComponent {
 			.subscribe(
 				() => {
 					this.toast.success('Pauta criada com sucesso', '')
-					this.router.navigate(['/home'])
+					this.router.navigate(['/voting'])
 				})
 
 		return

@@ -9,6 +9,7 @@ import {LocalStorageService} from '../../services/local-storage.service'
 import {QuestionWithPercentage} from '../../domain/types/questions-return.type'
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms'
 import {SubmitButtonComponent} from '../../components/submit-button/submit-button.component'
+import {VoteService} from '../../services/vote.service'
 
 @Component({
 	selector: 'app-question',
@@ -28,13 +29,14 @@ export class QuestionComponent implements OnInit{
 			this.findById(data['id'])
 		})
 	}
-	constructor(private questionService: QuestionsService, private active: ActivatedRoute, private toast: ToastService) {
+	constructor(private questionService: QuestionsService, private voteService: VoteService, private active: ActivatedRoute, private toast: ToastService) {
 	}
 
 	public questionId: string = ''
 	public question: Question | undefined
 	public yesVotes: number = 0
 	public noVotes: number = 0
+	public userCanVote: boolean = false
 
 	public findById(id: string) {
 		this.questionService
@@ -95,7 +97,7 @@ export class QuestionComponent implements OnInit{
 	public vote(answer: string) {
 		const cpf = LocalStorageService.get<string>('@cpf')
 		this
-			.questionService
+			.voteService
 			.vote(this.questionId, cpf, answer)
 			.subscribe(() => {
 				this
@@ -103,6 +105,12 @@ export class QuestionComponent implements OnInit{
 					.success('Voto contabilizado com sucesso', '')
 					.onHidden.subscribe(() => location.reload())
 			})
+	}
+
+	public canVote(cpf: string) {
+		return this
+			.voteService
+			.canVote(cpf)
 	}
 
 	checkLoggedUser() {
@@ -117,13 +125,13 @@ export class QuestionComponent implements OnInit{
 		return false
 	}
 
-	checkIsFinished(dateFinish: string | undefined) {
-		if (!dateFinish) return true
+	shouldFinish(dateFinish: string | undefined) {
+		if (!dateFinish) return false
 
 		const today = new Date()
 		const dateShouldFinish = new Date(dateFinish)
 
-		return dateShouldFinish > today
+		return today > dateShouldFinish
 	}
 
 	verifyCpf() {
@@ -131,13 +139,20 @@ export class QuestionComponent implements OnInit{
 	}
 
 	public checkToVote() {
-		console.log(this.newForm.invalid)
 		if (this.newForm.invalid) {
 			this.toast.error('CPF inválido', '')
 			return
 		}
 
-		LocalStorageService.set('@cpf', this.newForm.value.cpf)
+		const cpf = this.newForm.value.cpf ? this.newForm.value.cpf : null
+
+		if (cpf) {
+			this.canVote(cpf)
+				.subscribe((canVote: any) => {
+					this.userCanVote = (canVote as { body: boolean }).body
+					LocalStorageService.set('@cpf', this.newForm.value.cpf)
+				})
+		}
 	}
 
 	public newForm = new FormGroup({
