@@ -68,10 +68,13 @@ export namespace QuestionService {
 			}
 		}
 
+		session.month += question!.sessionTime.month
 		if (session.month >= 12) {
 			session.year += Math.floor(session.month / 12)
 			session.month %= 12
 		}
+
+		session.year += question!.sessionTime.year
 
 		const { year, month, day, hour, minutes, seconds } = session
 
