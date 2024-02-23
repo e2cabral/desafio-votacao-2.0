@@ -1,5 +1,5 @@
 import { Component } from '@angular/core'
-import {RouterLink} from '@angular/router'
+import {Router, RouterLink} from '@angular/router'
 import {BaseLinkComponent} from '../base-link/base-link.component'
 import {LocalStorageService} from '../../services/local-storage.service'
 
@@ -14,9 +14,17 @@ import {LocalStorageService} from '../../services/local-storage.service'
 	styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+	constructor(private router: Router) {
+
+	}
 
 	checkLoggedUser() {
 		return LocalStorageService.get('@auth')
+	}
+
+	logout() {
+		LocalStorageService.unset('@auth')
+		this.router.navigate(['/'])
 	}
 
 }
