@@ -28,6 +28,17 @@ export namespace QuestionService {
 			seconds: today.getSeconds(),
 		}
 
+		if (
+			!session.year &&
+			!session.month &&
+			!session.day &&
+			!session.hour &&
+			!session.minutes &&
+			!session.seconds
+		) {
+			session.minutes = 1
+		}
+
 		session.seconds += question!.sessionTime.seconds
 		if (session.seconds >= 60) {
 			session.minutes += Math.floor(session.seconds / 60)
