@@ -13,7 +13,7 @@ export namespace Voting {
 
 			const hasAlreadyVoted = questionVoted!
 				.votes
-				.some((vote: any) => vote.userId.toString() === voting.cpf)
+				.some((vote: any) => vote.cpf.toString() === voting.cpf)
 
 			if (hasAlreadyVoted) {
 				throw new Error('User has already voted')
