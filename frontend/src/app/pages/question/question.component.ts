@@ -24,6 +24,9 @@ import {VoteService} from '../../services/vote.service'
 })
 export class QuestionComponent implements OnInit{
 	ngOnInit() {
+		LocalStorageService.unset('@can-vote')
+		LocalStorageService.unset('@cpf')
+
 		this.active.params.subscribe((data) => {
 			this.questionId = data['id']
 			this.findById(data['id'])
@@ -33,7 +36,7 @@ export class QuestionComponent implements OnInit{
 		const logged = LocalStorageService.get('@auth')
 
 		if (logged) {
-			this.userCanVote =true
+			this.userCanVote = true
 		}
 
 		if (canVote) {
