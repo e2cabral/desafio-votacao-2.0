@@ -23,3 +23,14 @@ Possíveis melhorias:
 + Implemntação de testes unitários
 + Melhoria em repossividade
 + Conexão com Prometheus, Grafana ou criação de dashboard para análise de métricas fornecidas.
+
+### Banco de dados
+
+Para iniciar o banco de dados:
+```shell
+docker run -d --network some-network --name some-mongo \
+	-e MONGO_INITDB_ROOT_USERNAME=mongoadmin \
+	-e MONGO_INITDB_ROOT_PASSWORD=secret \
+	-e MONGO_INITDB_DATABASE=questions
+	mongo
+```
