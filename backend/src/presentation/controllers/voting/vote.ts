@@ -1,6 +1,6 @@
 import {FastifyReply, FastifyRequest} from 'fastify'
 import {ConvertTo} from '../../helpers/convertion.helper'
-import {VotingEntity} from '../../../domain/entities/question.entity'
+import {VotingEntity} from '../../../domain/entities/voting.entity'
 import {logger} from '../../../main/config/logger.config'
 import {VotingService} from '../../../domain/services/voting'
 import {VoterEntity} from '../../../domain/entities/voting.entity'
