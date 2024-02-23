@@ -1,4 +1,4 @@
-import {VotingEntity} from '../../entities/question.entity'
+import {VotingEntity} from '../../entities/voting.entity'
 import {Voting} from '../../../data/repositories/voting'
 import {logger} from '../../../main/config/logger.config'
 import {VoterEntity} from '../../entities/voting.entity'
