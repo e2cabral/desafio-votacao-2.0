@@ -1,5 +1,5 @@
 import QuestionEntity, {SessionTime} from '../../entities/question.entity'
-import {findByCreator, Question} from '../../../data/repositories/question'
+import {Question} from '../../../data/repositories/question'
 import { logger } from '../../../main/config/logger.config'
 
 export namespace QuestionService {
