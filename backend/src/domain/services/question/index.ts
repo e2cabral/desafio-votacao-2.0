@@ -1,6 +1,7 @@
 import QuestionEntity, {SessionTime} from '../../entities/question.entity'
 import {Question} from '../../../data/repositories/question'
 import { logger } from '../../../main/config/logger.config'
+import {DaysPerMonth} from '../../../presentation/helpers/date.helper'
 
 export namespace QuestionService {
 	export const create = async (question: QuestionEntity)=> {
@@ -57,15 +58,19 @@ export namespace QuestionService {
 			session.hour %= 24
 		}
 
-		const daysInMonth = (year: number, month: number) => new Date(year, month + 1, 0).getDate()
-
-		while (session.day > daysInMonth(session.year, session.month)) {
-			session.day -= daysInMonth(session.year, session.month)
-			session.month++
-			if (session.month > 11) {
+		session.day += question!.sessionTime.day
+		if (session.day >= DaysPerMonth.getMonth(session.month)!.max) {
+			session.month += 1
+			session.day = 1
+			if (session.month >= 12) {
+				session.year += 1
 				session.month = 0
-				session.year++
 			}
+		}
+
+		if (session.month >= 12) {
+			session.year += Math.floor(session.month / 12)
+			session.month %= 12
 		}
 
 		const { year, month, day, hour, minutes, seconds } = session
